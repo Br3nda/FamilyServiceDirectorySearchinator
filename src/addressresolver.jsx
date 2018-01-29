@@ -31,8 +31,8 @@ class AddressResolver extends React.Component {
     let url = 'https://api.addressfinder.io/api/nz/address?';
     let query = `format=json&key=${key}&q=${this.props.address}`;
 
-    axios.get(`${url}${query}`)
-      .then(res => {
+    axios.get(`${url}${query}`).
+      then(res => {
         this.setState({ addresses: res.data.completions });
       });
   }
@@ -66,8 +66,8 @@ class Address extends React.Component {
     let url = 'https://api.addressfinder.io/api/nz/address/info?';
     let query = `key=${key}&format=json&pxid=${this.props.record.pxid}`;
 
-    axios.get(`${url}${query}`)
-      .then(res => {
+    axios.get(`${url}${query}`).
+      then(res => {
         this.props.handler(res.data);
       });
   }
