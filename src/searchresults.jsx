@@ -47,7 +47,7 @@ class SearchResults extends React.Component {
     }
   }
   componentDidUpdate(prevProps /*, prevState*/) {
-    // only update if data has changed
+    // Only update if data has changed
     if (prevProps !== this.props) {
       this.fetchResults();
     }

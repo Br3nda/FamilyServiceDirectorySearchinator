@@ -41,7 +41,7 @@ class MapResults extends React.Component {
     return [this.props.latitude, this.props.longitude];
   }
   defaultCentre() {
-    // roughly the centre of aotearoa
+    // Roughly the centre of aotearoa
     return [-41.0, 174.0];
   }
   renderMarkers() {
