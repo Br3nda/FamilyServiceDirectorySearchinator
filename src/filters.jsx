@@ -12,8 +12,8 @@ class SearchFilters extends React.Component {
   fetchRecords(field) {
     let sql = encodeURI(`SELECT "${field}" as name, COUNT(*) as num FROM "${this.resourceId}" GROUP BY name ORDER BY name`);
     let url = `https://catalogue.data.govt.nz/api/3/action/datastore_search_sql?sql=${sql}`;
-    axios.get(url)
-      .then(res => {
+    axios.get(url).
+      then(res => {
         this.setState({ records: res.data.result.records });
       });
   }
