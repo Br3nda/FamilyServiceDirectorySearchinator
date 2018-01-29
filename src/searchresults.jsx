@@ -22,10 +22,10 @@ class SearchResults extends React.Component {
   filters() {
     let filters = {};
     if(this.props.category) {
-      filters['LEVEL_1_CATEGORY'] = this.props.category;
+      filters.LEVEL_1_CATEGORY = this.props.category;
     }
     if(this.props.region) {
-      filters['PHYSICAL_REGION'] = this.props.region;
+      filters.PHYSICAL_REGION = this.props.region;
     }
     return JSON.stringify(filters);
   }
