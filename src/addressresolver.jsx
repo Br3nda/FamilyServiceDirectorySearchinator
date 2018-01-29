@@ -48,8 +48,7 @@ class AddressResolver extends React.Component {
           {this.renderAddresses()}
         </ListGroup>
       );
-    }
-    else {
+    } else {
       return '';
     }
   }

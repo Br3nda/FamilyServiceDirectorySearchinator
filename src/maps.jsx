@@ -21,8 +21,7 @@ class ServiceMapMarker extends React.Component {
           </Popup>
         </Marker>
       );
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -32,8 +31,7 @@ class MapResults extends React.Component {
     super(props);
     if(this.props.longitude && this.props.latitude) {
       this.state = { centre: this.centre(), zoom: 12 };
-    }
-    else {
+    } else {
       this.state = { centre: this.defaultCentre(), zoom: 5 };
     }
   }

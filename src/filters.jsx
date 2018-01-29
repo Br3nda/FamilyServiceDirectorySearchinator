@@ -42,8 +42,7 @@ class FilterButton extends React.Component {
     let newSelection;
     if(this.props.selected) {
       newSelection = '';
-    }
-    else {
+    } else {
       newSelection = this.props.record.name;
     }
     this.props.handler(newSelection);
@@ -63,8 +62,7 @@ class FilterButton extends React.Component {
           <sub>({this.props.record.num})</sub>
         </NavItem>
       );
-    }
-    else {
+    } else {
       return '';
     }
   }
