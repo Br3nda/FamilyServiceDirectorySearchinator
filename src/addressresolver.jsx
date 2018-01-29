@@ -18,7 +18,7 @@ class AddressResolver extends React.Component {
     this.props.handler(selected);
   }
   componentDidUpdate(prevProps /*, prevState*/) {
-    // only update if data has changed
+    // Only update if data has changed
     if (prevProps !== this.props) {
       this.setState({selected: false});
       this.fetchAddresses();
