@@ -41,8 +41,7 @@ class SearchResults extends React.Component {
         .then(res => {
           this.setState({ results: res.data.result.records, loading: false });
         });
-    }
-    else {
+    } else {
       this.setState({results: []});
     }
   }
@@ -102,8 +101,7 @@ class SearchResults extends React.Component {
     if(this.state.results.length > 0 ) {
       if (this.state.show_map) {
         return this.renderMap();
-      }
-      else {
+      } else {
         return this.renderList();
       }
     }
@@ -111,8 +109,7 @@ class SearchResults extends React.Component {
     // No results
     if (this.queryEntered()) {
       return this.renderNoResults();
-    }
-    else {
+    } else {
       return '';
     }
   }
