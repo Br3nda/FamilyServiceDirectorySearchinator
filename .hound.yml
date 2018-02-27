@@ -3,3 +3,5 @@ eslint:
   config_file: .eslintrc
 jshint:
   enabled: false
+scss:
+  config_file: .scss-lint.yml
