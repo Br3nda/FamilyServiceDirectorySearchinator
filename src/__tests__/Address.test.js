@@ -9,7 +9,7 @@ describe('Form', () => {
     record: {
       a: '123'
     }
-  }
+  };
   it('submit event when click submit', () => {
     const callback = spy();
     const wrapper = mount(<Address {...minProps}/>);

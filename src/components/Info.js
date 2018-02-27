@@ -4,7 +4,7 @@ class Info extends Component {
 
   render() {
     if(this.props.record.location.state) {
-    return (
+      return (
         <div className="container-fluid">
           <div className="service-info">
             <h2>{this.props.record.location.state.PROVIDER_NAME}</h2>

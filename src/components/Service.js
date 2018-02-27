@@ -49,20 +49,20 @@ class Service extends Component {
   }
   render() {
     return (
-    <div className="service">
-      <div className="search-result-hero">
-        <Link to={{ pathname: `/service/${this.urlify(this.props.record.PROVIDER_NAME)}`, state: this.props.record}} onClick={()=>this.props.changeResult(this.props.record)}><h3>{this.props.record.PROVIDER_NAME}</h3></Link>
-        <p>{this.props.record.PHYSICAL_ADDRESS}</p>
-        <span><u>Show on map</u></span>
+      <div className="service">
+        <div className="search-result-hero">
+          <Link to={{ pathname: `/service/${this.urlify(this.props.record.PROVIDER_NAME)}`, state: this.props.record}} onClick={()=>this.props.changeResult(this.props.record)}><h3>{this.props.record.PROVIDER_NAME}</h3></Link>
+          <p>{this.props.record.PHYSICAL_ADDRESS}</p>
+          <span><u>Show on map</u></span>
+        </div>
+        <div className="service-details">
+          <h4>{this.props.record.SERVICE_NAME}</h4>
+          <p>{this.props.record.SERVICE_DETAIL}</p>
+          <ul className="list-stripped">
+            {this.serviceDetails()}
+          </ul>
+        </div>
       </div>
-      <div className="service-details">
-        <h4>{this.props.record.SERVICE_NAME}</h4>
-        <p>{this.props.record.SERVICE_DETAIL}</p>
-        <ul className="list-stripped">
-          {this.serviceDetails()}
-        </ul>
-      </div>
-    </div>
     );
   }
 }
