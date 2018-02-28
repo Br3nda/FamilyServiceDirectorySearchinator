@@ -27,7 +27,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-app-env start",
     "build": "react-app-env build",
-    "test": "react-app-env jest",
+    "test": "jest",
     "eject": "react-app-env eject",
     "sass": "sass --watch src/styles/scss:src/styles/"
   },
