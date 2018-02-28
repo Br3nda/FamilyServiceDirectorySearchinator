@@ -9,10 +9,6 @@ class Filters extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    this.props.data.loadResults(this.state.value, '');
-  }
-
   handleChange(event) {
     this.setState({value: event.target.value});
   }

@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers/index';
 import ServiceInfo from './components/Service/ServiceInfo';
 import { HashRouter, Route } from 'react-router-dom';
-import HttpsRedirect from 'react-https-redirect';
+
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 const store = createStore(reducers, applyMiddleware(thunk));
@@ -28,4 +28,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<Provider store={store}><HttpsRedirect><App /></HttpsRedirect></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
