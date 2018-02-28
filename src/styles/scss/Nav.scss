@@ -1,34 +1,11 @@
 @import "./helpers/lists";
-$primary-text-color: #484848;
-$primary-color: #39b54a;
-$light-text-color: #fff;
 
-.nav { 
-  width: 100%;
+$primary-color: #35a744;
+$primary-text-color: #fff;
 
-  a {
-    background: $light-text-color;
-    border: 1px solid $primary-color;
-    color: $primary-text-color;
-    display: inline-block;
-    margin: 0 3px 7px;
-    text-decoration: none;
-
-    sub {
-      display: inline-block;
-      margin-bottom: 4px;
-      margin-left: 5px;
-      vertical-align: middle;
-    }
-
-    &:hover,
-    &.primary {
-      background: $primary-color;
-      color: $light-text-color;
-    }
-  }
-
-  div { padding: 7px 10px 5px;}
+.selected {
+  background: $primary-color;
+  color: $primary-text-color;
 }
 
 .list-icon {
@@ -36,5 +13,12 @@ $light-text-color: #fff;
   > span {
     display: inline-block;
     margin-right: 10px;
+  }
+}
+
+@media (max-width:425px) {
+  
+  .nav {
+    display: none;
   }
 }

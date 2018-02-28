@@ -19,11 +19,6 @@ class MapResults extends Component {
     // roughly the centre of aotearoa
     return [-41.0, 174.0];
   }
-  renderMarkers() {
-    return this.props.results.map((record, i) =>
-      <ServiceMapMarker key={'marker'+i} record={record} />
-    );
-  }
   render() {
     return (
       <Map center={this.state.centre} zoom={this.state.zoom}>
@@ -31,7 +26,11 @@ class MapResults extends Component {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
-        {this.renderMarkers()}
+
+        {this.props.map_results.map((record, i) =>
+          <ServiceMapMarker key={'marker'+i} record={record} />
+        )};
+
       </Map>
     );
   }

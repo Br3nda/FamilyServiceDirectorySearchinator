@@ -1,0 +1,49 @@
+.service {
+  border-bottom: 1px solid #c4c4c4;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  overflow: auto;
+  padding-bottom: 30px;
+  padding-right: 5%; }
+  .service a {
+    text-decoration: none;
+    color: #35a744; }
+    .service a h3 {
+      color: #35a744; }
+    .service a .telephone {
+      color: #35a744; }
+  .service dt {
+    clear: left;
+    float: left;
+    font-weight: bold;
+    width: 160px; }
+  .service dt::after {
+    content: ":"; }
+  .service dd {
+    margin-bottom: 7px;
+    margin-left: 160px;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0.5em;
+    padding-right: 0;
+    padding-top: 0; }
+
+.service-details {
+  padding-left: 25px; }
+
+.search-result-hero {
+  border-left: 4px solid #35a744;
+  padding-bottom: 5px;
+  padding-left: 21px;
+  padding-top: 3px; }
+  .search-result-hero a {
+    color: #35a744; }
+  .search-result-hero h2 {
+    font-size: 24px;
+    margin: 7px 0; }
+  .search-result-hero p {
+    margin-bottom: 3px;
+    margin-top: 0; }
+
+/*# sourceMappingURL=Service.css.map */

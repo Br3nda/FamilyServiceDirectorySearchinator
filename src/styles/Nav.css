@@ -8,28 +8,16 @@
 .list-icon {
   margin-bottom: 7px; }
 
-.nav {
-  width: 100%; }
-  .nav a {
-    background: #fff;
-    border: 1px solid #39b54a;
-    color: #484848;
-    display: inline-block;
-    margin: 0 3px 7px;
-    text-decoration: none; }
-    .nav a sub {
-      display: inline-block;
-      margin-bottom: 4px;
-      margin-left: 5px;
-      vertical-align: middle; }
-    .nav a:hover, .nav a.primary {
-      background: #39b54a;
-      color: #fff; }
-  .nav div {
-    padding: 7px 10px 5px; }
+.selected {
+  background: #35a744;
+  color: #fff; }
 
 .list-icon > span {
   display: inline-block;
   margin-right: 10px; }
+
+@media (max-width: 425px) {
+  .nav {
+    display: none; } }
 
 /*# sourceMappingURL=Nav.css.map */

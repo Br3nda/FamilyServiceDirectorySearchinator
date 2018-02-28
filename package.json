@@ -12,19 +12,23 @@
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-fontawesome": "^1.6.1",
+    "react-https-redirect": "^1.0.10",
     "react-icons": "^2.2.7",
     "react-leaflet": "^1.8.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "sinon": "^4.3.0"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "jest",
-    "eject": "react-scripts eject",
+    "start": "react-app-env start",
+    "build": "react-app-env build",
+    "test": "react-app-env jest",
+    "eject": "react-app-env eject",
     "sass": "sass --watch src/styles/scss:src/styles/"
   },
   "devDependencies": {
@@ -38,7 +42,8 @@
     "eslint-plugin-react": "^7.6.1",
     "expect": "^22.3.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.3.0"
+    "jest": "^22.3.0",
+    "react-app-env": "^1.2.0"
   },
   "jest": {
     "moduleNameMapper": {
