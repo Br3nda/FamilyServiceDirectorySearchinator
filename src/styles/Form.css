@@ -30,25 +30,6 @@ input[type=search] {
 .btn-toggle {
   margin-bottom: 20px; }
 
-.address-finder {
-  width: 100%;
-  margin: 0 3px 7px; }
-  .address-finder li {
-    border: 1px solid #35a744;
-    font-size: inherit;
-    padding: 7px;
-    border-bottom: 0; }
-    .address-finder li:last-child {
-      border-bottom: 1px solid #35a744; }
-    .address-finder li:hover {
-      background-color: #35a744;
-      color: #fff;
-      cursor: pointer; }
-
-.address-finder-input {
-  margin-bottom: 0;
-  position: relative; }
-
 @media (min-width: 426px) {
   .filters select {
     display: none; } }

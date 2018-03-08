@@ -1,4 +1,5 @@
 import axios from 'axios';
+import geolib from 'geolib';
 
 const RESOURCE_ID = process.env.REACT_APP_API_RESOURCE_ID;
 const API_PATH = process.env.REACT_APP_API_PATH;
@@ -17,44 +18,60 @@ export function loadFilters(){
   };
 }
 
-export function loadResults(category, keyword) {
+export function loadResults(category, keyword, addressLatLng) {
+
   let url = encodeURI(`${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${FIELDS}&q=${q(keyword)}&distinct=true${filters(category)}`);
+  let addressObj = Object.keys(addressLatLng ? addressLatLng : {none: 'none'});
   return (dispatch) => {
     return axios.get(url).then((response)=>{
-      dispatch(showResults(response.data.result.records, category, keyword));
+
+      if(addressObj.length === 2 && addressLatLng !== undefined) {
+        dispatch(showResults(findNearMe(response.data.result.records, addressLatLng), category, keyword, addressLatLng));
+      } else {
+        dispatch(showResults(checkLatLng(response.data.result.records), category, keyword, addressLatLng));
+      }
     });
   };
 }
 
-export function fetchAddressFinder(address, pxid) {
-  let key = 'ADDRESSFINDER_DEMO_KEY';
-  let url = 'https://api.addressfinder.io/api/nz/address?';
-  let query = `format=json&key=${key}&q=${address}&pxid=${pxid}`;
-  return (dispatch) => {
-    return axios.get(`${url}${query}`).then((response)=>{
-      dispatch(fetchAddresses(response.data.completions));
-    });
+function checkLatLng(data) {
+  return data.filter(r => r.PHYSICAL_ADDRESS.match(/\d+/g) !== null && r.LATITUDE !== '0' && r.LONGITUDE !== '0' && r.LATITUDE !== null && r.LONGITUDE !== null);
+}
+
+function findNearMe(data, addressLatLng) {
+
+  let filteredData = checkLatLng(data);
+
+  for(let i in filteredData) {
+    let isInside = geolib.isPointInCircle(
+      {latitude: addressLatLng.latitude, longitude: addressLatLng.longitude},
+      {latitude: filteredData[i].LATITUDE, longitude: filteredData[i].LONGITUDE},
+      25000
+    ); // 25km radius
+    let distance = geolib.getDistance(
+      {latitude: addressLatLng.latitude, longitude: addressLatLng.longitude},
+      {latitude: filteredData[i].LATITUDE, longitude: filteredData[i].LONGITUDE}
+    );
+    filteredData[i].NEARME = isInside;
+    filteredData[i].DISTANCE = distance;
   }
+  return filteredData.filter(r => r.NEARME === true);
 }
 
 export function showFilters(filters){
   return {
     type: 'SHOW_FILTERS',
     filters
-  }
+  };
 }
 
-export function showResults(results, category, keyword) {
+export function showResults(results, category, keyword, addressLatLng) {
   return {
     type: 'SHOW_RESULTS',
     results,
     category,
-    keyword
-  }
+    keyword,
+    addressLatLng
+  };
 }
-export function fetchAddresses(addresses) {
-  return {
-    type: 'FETCH_ADDRESSES',
-    addresses
-  }
-}
+

@@ -11,6 +11,7 @@ class Filters extends React.Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
+    this.props.data.loadResults(event.target.value, '', this.props.addressLatLng);
   }
 
   render(){
@@ -19,7 +20,7 @@ class Filters extends React.Component {
         <nav className="nav">
           {this.props.data.filters.map(data => {
             return (<button className={this.props.data.category === data.name ? 'selected'  : ''} key={data.num} 
-            onClick={()=> {this.props.data.loadResults(data.name, '');}}>{data.name}</button>);
+            onClick={()=> {this.props.data.loadResults(data.name, '', this.props.addressLatLng);}}>{data.name}</button>);
           })}
         </nav>
         <select value={this.state.value} onChange={this.handleChange.bind(this)}>

@@ -3,7 +3,7 @@ let defaultState = {
   results: [],
   category: '',
   keyword: '',
-  addresses: []
+  addressLatLng: {}
 };
 
 const mainReducer = (state = defaultState, action) => {
@@ -18,13 +18,10 @@ const mainReducer = (state = defaultState, action) => {
       ...state,
       results: action.results,
       category: action.category,
-      keyword: action.keyword
+      keyword: action.keyword,
+      addressLatLng: action.addressLatLng
     };
-  case 'FETCH_ADDRESSES':
-    return {
-      ...state,
-      addresses: action.addresses
-    };
+
   default:
     return {
       ...state

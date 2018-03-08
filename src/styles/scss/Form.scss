@@ -38,33 +38,6 @@ input[type=search] { -webkit-appearance: textfield; }
   margin-bottom: 20px;
 }
 
-.address-finder {
-  width: 100%;
-  margin: 0 3px 7px;
-
-  li {
-    border: 1px solid $primary-color;
-    font-size: inherit;
-    padding: 7px;
-    border-bottom: 0;
-
-    &:last-child {
-      border-bottom: 1px solid $primary-color;
-    }
-
-    &:hover {
-      background-color: $primary-color;
-      color: $primary-background;
-      cursor: pointer;
-    }
-  }
-}
-
-.address-finder-input {
-  margin-bottom: 0;
-  position:relative;
-}
-
 @media (min-width: 426px) {
   .filters {
     select { display: none; }

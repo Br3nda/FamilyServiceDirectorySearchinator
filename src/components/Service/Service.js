@@ -34,7 +34,6 @@ class Service extends React.Component {
   render() {
 
     let data = this.props.results;
-
     return (
       <div>
         <div className="service">

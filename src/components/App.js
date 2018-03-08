@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actions/index';
 import MapResults from './Map/MapResults';
-import AddressField from './Forms/AddressField';
+import AddressFinder from './Forms/AddressFinder';
 import Filters from './Service/Filters';
 import Service from '../components/Service/Service';
 import '../styles/Nav.css';
@@ -13,26 +13,29 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      showMap: false
+      showMap: false,
+      latlng: []
     };
   }
 
   componentWillMount () {
     this.props.loadFilters();
   }
+  
 
   render() {
     return (
       <div className="container-fluid">
         
-        <Filters data={this.props} />
+        <Filters data={this.props} addressLatLng={this.props.addressLatLng} />
         
         <form className="form" onSubmit={(e)=>{
           e.preventDefault();
-          this.props.loadResults(this.state.category, e.target.keyword.value);
+          this.setState({latlng: this.props.addressLatLng});
+          this.props.loadResults(this.state.category, e.target.keyword.value, this.props.addressLatLng === undefined ? this.state.latlng : this.props.addressLatLng);
         }}>
           <input type="search" name="keyword" placeholder="Enter topic or organisation" />
-          <AddressField data={this.props} />
+          <AddressFinder data={this.props} />
           <button type="submit">Search</button>
         </form>
         <div>
@@ -41,7 +44,7 @@ class App extends Component {
               this.setState({ showMap: !this.state.showMap}); }
             }>{this.state.showMap ? 'Show List' : 'Toggle Map'}</button>
           }
-          { this.state.showMap && <MapResults className="container-fluid" map_results={this.props.results} />}
+          { this.state.showMap && <MapResults className="container-fluid" LatLng={this.props.addressLatLng} map_results={this.props.results} />}
           { !this.state.showMap && this.props.results.map((data, key)=> <Service key={key} results={data} filter={this.props.name} />)}
         </div>
 
@@ -56,8 +59,8 @@ function mapStateToProps(state) {
     results: state.results,
     showMap: state.showMap,
     keyword: state.keyword,
-    addresses: state.addresses,
-    category: state.category
+    category: state.category,
+    addressLatLng: state.addressLatLng
   };
 }
 

@@ -23,12 +23,4 @@ describe('actions', () => {
     expect(actions.showResults(results, category, keyword)).toEqual(expectedAction);
   });
 
-  it('should fetch a list of addresses', () => {
-    const addresses = [{a: '3 Alastair Avenue, Owhata, Rotorua 3010', pxid: '2-.2.v.J.1$Y', v: 1}];
-    const expectedAction = {
-      type: 'FETCH_ADDRESSES',
-      addresses
-    };
-    expect(actions.fetchAddresses(addresses)).toEqual(expectedAction);
-  });
 });
