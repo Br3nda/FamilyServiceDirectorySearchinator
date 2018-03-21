@@ -1,0 +1,78 @@
+@import "./variables";
+
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: $white;
+  background-color: $primary-dark;
+
+  ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+
+  li {
+    padding: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    font-size: 15px;
+    display: inline-block;
+
+    &:link,
+    &:visited {
+      color: $white;
+      border-bottom: 1px dotted $black;
+    }
+  }
+}
+
+.footer-item {
+  margin-bottom: 3rem;
+}
+
+.footer-icons {
+  margin-bottom: 1rem;
+}
+
+.footer-utility-nav {
+  max-width: 270px;
+  margin: 0 auto;
+
+  li {
+    display: inline-block;
+    width: 33.33%;
+    text-align: center;
+  }
+}
+
+.footer-hm-link {
+  display: block;
+  max-width: 352px;
+}
+
+@media screen and (min-width: 426px){
+  .footer-utility-nav {
+    margin: initial;
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import AppCon from './container/app-container';
+import Footer from './components/Templates/Footer';
 // import { createStore, applyMiddleware, compose } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -29,3 +30,4 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Footer />, document.getElementById('footer'));
