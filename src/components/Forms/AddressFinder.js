@@ -11,7 +11,7 @@ class AddressFinder extends React.Component {
       'NZ',
       {manual_style:true}
     );
-    
+
     widget.on('result:select', (value, item) => {
       this.props.data.loadResults(
         this.props.data.category ? this.props.data.category : '', '', {latitude: item.y, longitude: item.x});

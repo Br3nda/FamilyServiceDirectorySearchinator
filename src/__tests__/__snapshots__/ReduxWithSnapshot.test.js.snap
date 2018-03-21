@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions should retrieve the filters 1`] = `
+Object {
+  "filters": Array [
+    Object {
+      "name": "Addiction",
+    },
+  ],
+  "type": "SHOW_FILTERS",
+}
+`;
+
+exports[`actions should retrieve the results 1`] = `
+Object {
+  "addressLatLng": undefined,
+  "category": "Addiction",
+  "keyword": "Health",
+  "results": Array [
+    Object {
+      "DELIVERY_METHODS": "",
+      "FSD_ID": "6322",
+      "PHYSICAL_ADDRESS": "25 Thackeray Street, Hamilton",
+      "PUBLISHED_PHONE_1": "07 839 6871",
+      "SERVICE_NAME": "The Salvation Army Oasis Centre - Hamilton",
+    },
+  ],
+  "type": "SHOW_RESULTS",
+}
+`;

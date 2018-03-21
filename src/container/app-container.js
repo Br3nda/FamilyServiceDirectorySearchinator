@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index';
 
 class AppCon extends Component {
-  
   render() {
     return (
       <div>

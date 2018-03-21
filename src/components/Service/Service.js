@@ -1,38 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Service.css';
-import FaPhone from 'react-icons/lib/fa/phone';
-import FaMail from 'react-icons/lib/fa/envelope-o';
-import FaClock from 'react-icons/lib/fa/clock-o';
+import ServiceContactDetail from './ServiceContactDetail';
 
 class Service extends React.Component {
 
-  serviceDetails(data) {
-    let obj = [
-      {
-        icon: <FaPhone />,
-        val: <a href={`tel:${data.PUBLISHED_PHONE_1}`}>{data.PUBLISHED_PHONE_1}</a>
-      },
-      {
-        icon: <FaMail />,
-        val: data.PUBLISHED_CONTACT_EMAIL_1
-      },
-      {
-        icon: <FaClock />,
-        val: data.PROVIDER_CONTACT_AVAILABILITY
-      }
-    ];
-    
-    return obj.map((record, i) =>
-      <li key={i} className="list-icon">
-        <span>{record.icon}</span>
-        {record.val}
-      </li>
-    );
-  }
-
   render() {
-
     let data = this.props.results;
     return (
       <div>
@@ -44,9 +17,7 @@ class Service extends React.Component {
           <div className="service-details">
             <h4>{data.SERVICE_NAME}</h4>
             <p>{data.SERVICE_DETAIL}</p>
-            <ul className="list-stripped">
-              {this.serviceDetails(data)}
-            </ul>
+            <ServiceContactDetail phone={data.PUBLISHED_PHONE_1} email={data.PUBLISHED_CONTACT_EMAIL_1} hours={data.PROVIDER_CONTACT_AVAILABILITY} website={data.PROVIDER_WEBSITE_1}/>
           </div>
         </div>
       </div>

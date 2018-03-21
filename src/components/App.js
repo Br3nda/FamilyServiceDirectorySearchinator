@@ -21,14 +21,11 @@ class App extends Component {
   componentWillMount () {
     this.props.loadFilters();
   }
-  
 
   render() {
     return (
       <div className="container-fluid">
-        
         <Filters data={this.props} addressLatLng={this.props.addressLatLng} />
-        
         <form className="form" onSubmit={(e)=>{
           e.preventDefault();
           this.setState({latlng: this.props.addressLatLng});

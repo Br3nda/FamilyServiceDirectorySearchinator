@@ -6,7 +6,7 @@ class Filters extends React.Component {
     super(props);
     this.state = {
       value: ''
-    }
+    };
   }
 
   handleChange(event) {
@@ -19,19 +19,19 @@ class Filters extends React.Component {
       <div className="filters">
         <nav className="nav">
           {this.props.data.filters.map(data => {
-            return (<button className={this.props.data.category === data.name ? 'selected'  : ''} key={data.num} 
-            onClick={()=> {this.props.data.loadResults(data.name, '', this.props.addressLatLng);}}>{data.name}</button>);
+            return (<button className={this.props.data.category === data.name ? 'selected'  : ''} key={data.num}
+              onClick={()=> {this.props.data.loadResults(data.name, '', this.props.addressLatLng);}}>{data.name}</button>);
           })}
         </nav>
         <select value={this.state.value} onChange={this.handleChange.bind(this)}>
           <option name="filters" defaultValue>-- Select Category --</option>
           {this.props.data.filters.map(data => {
-          return (<option key={data.num} name="filters">{data.name}</option>);
+            return (<option key={data.num} name="filters">{data.name}</option>);
           })}
         </select>
       </div>
     );
-  };
+  }
 }
 
 export default Filters;
