@@ -1,10 +1,10 @@
 @import "./variables";
 
 .footer {
+  background-color: $primary-dark;
+  color: $white;
   padding-top: 40px;
   padding-bottom: 40px;
-  color: $white;
-  background-color: $primary-dark;
 
   ul {
     margin-top: 0;
@@ -13,10 +13,10 @@
   }
 
   li {
-    padding: 0;
+    list-style: none;
     margin-left: 0;
     margin-bottom: 0;
-    list-style: none;
+    padding: 0;
   }
 
   p {
@@ -24,21 +24,20 @@
   }
 
   .container {
-    padding: 0 1rem;
     margin-right: auto;
     margin-left: auto;
+    padding: 0 1rem;
   }
 
   img {
     display: block;
-    max-width: 100%;
     height: auto;
+    max-width: 100%;
   }
 
   a {
-    font-size: 15px;
     display: inline-block;
-
+    font-size: 15px;
     &:link,
     &:visited {
       color: $white;
@@ -56,13 +55,12 @@
 }
 
 .footer-utility-nav {
-  max-width: 270px;
   margin: 0 auto;
-
+  max-width: 270px;
   li {
     display: inline-block;
-    width: 33.33%;
     text-align: center;
+    width: 33.33%;
   }
 }
 

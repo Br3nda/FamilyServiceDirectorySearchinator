@@ -5,7 +5,7 @@
   margin-bottom: 0;
   position: relative; }
 
-ul.af_list {
+.af_list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -13,16 +13,16 @@ ul.af_list {
   background: white;
   box-sizing: border-box; }
 
-li.af_item {
+.af_item {
   cursor: pointer;
   padding: 10px;
   border-bottom: 1px solid #35a744; }
 
-li.af_hover {
+.af_hover {
   background-color: green;
   color: white; }
 
-li.af_footer {
+.af_footer {
   font-size: 0.8em;
   color: yellow;
   text-align: right; }

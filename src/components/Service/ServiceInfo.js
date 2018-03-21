@@ -4,6 +4,7 @@ import * as actionCreators from '../../actions/index';
 import MapResults from '../Map/MapResults';
 import { Link } from 'react-router-dom';
 import ServiceContactDetail from './ServiceContactDetail';
+import Sharebar from '../Social/Sharebar';
 
 export class ServiceInfo extends React.Component {
 
@@ -30,6 +31,7 @@ export class ServiceInfo extends React.Component {
                   <h4>{i.SERVICE_NAME}</h4>
                   <p>{i.SERVICE_DETAIL}</p>
                   <ServiceContactDetail phone={i.PUBLISHED_PHONE_1} email={i.PUBLISHED_CONTACT_EMAIL_1} hours={i.PROVIDER_CONTACT_AVAILABILITY} website={i.PROVIDER_WEBSITE_1}/>
+                  <Sharebar subject={i.PROVIDER_NAME}/>
                 </div>
               ))}
           </ul>

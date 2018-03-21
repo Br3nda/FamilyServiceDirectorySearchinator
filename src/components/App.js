@@ -5,6 +5,7 @@ import MapResults from './Map/MapResults';
 import AddressFinder from './Forms/AddressFinder';
 import Filters from './Service/Filters';
 import Service from '../components/Service/Service';
+import Sharebar from '../components/Social/Sharebar';
 import '../styles/Nav.css';
 import '../styles/Form.css';
 
@@ -44,7 +45,7 @@ class App extends Component {
           { this.state.showMap && <MapResults className="container-fluid" LatLng={this.props.addressLatLng} map_results={this.props.results} />}
           { !this.state.showMap && this.props.results.map((data, key)=> <Service key={key} results={data} filter={this.props.name} />)}
         </div>
-
+        <Sharebar/>
       </div>
     );
   }

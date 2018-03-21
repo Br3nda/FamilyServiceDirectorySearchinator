@@ -14,7 +14,7 @@ class Footer extends React.Component {
           <div className="footer-push">
             <div className="footer-icons">
               <a href="https://www.govt.nz" className="ga-track-logo-footer-aog footer-hm-link">
-                <img src="/footer-logo-govt.png" srcSet="/footer-logo-govt@2x.png 2x,/footer-logo-govt.png 1x" width="240" height="46" alt="New Zealand Government" />
+                <img src="footer-logo-govt.png" srcSet="footer-logo-govt@2x.png 2x,footer-logo-govt.png 1x" width="240" height="46" alt="New Zealand Government" />
               </a>
             </div>
           </div>
