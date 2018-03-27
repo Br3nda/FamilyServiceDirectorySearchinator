@@ -1,3 +1,6 @@
+.leaflet-container {
+  margin-top: 40px; }
+
 .service {
   border-bottom: 1px solid #c4c4c4;
   margin-top: 40px;

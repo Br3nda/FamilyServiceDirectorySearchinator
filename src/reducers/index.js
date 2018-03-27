@@ -3,11 +3,19 @@ let defaultState = {
   results: [],
   category: '',
   keyword: '',
-  addressLatLng: {}
+  addressLatLng: {},
+  radius: 25000,
+  itemsLoading: false,
+  hasSearched: false
 };
 
 const mainReducer = (state = defaultState, action) => {
   switch (action.type) {
+  case 'LOAD_RESULTS':
+    return {
+      ...state,
+      itemsLoading: action.loading
+    };
   case 'SHOW_FILTERS':
     return {
       ...state,
@@ -19,7 +27,9 @@ const mainReducer = (state = defaultState, action) => {
       results: action.results,
       category: action.category,
       keyword: action.keyword,
-      addressLatLng: action.addressLatLng
+      addressLatLng: action.addressLatLng,
+      radius: action.radius,
+      hasSearched: true
     };
 
   default:

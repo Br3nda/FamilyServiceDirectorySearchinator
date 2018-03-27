@@ -16,6 +16,7 @@ Object {
   "addressLatLng": undefined,
   "category": "Addiction",
   "keyword": "Health",
+  "radius": undefined,
   "results": Array [
     Object {
       "DELIVERY_METHODS": "",

@@ -1,11 +1,40 @@
-@import "./variables.css";
+@import "./variables";
 
-$primary-text-color: #484848;
-$primary-color: #35a744;
-$secondary-color: #c4c4c4;
-$primary-background: #fff;
 
 form { margin: 25px 0 35px; }
+
+.loader {
+  margin-top: 0.2em;
+  margin-left: 0.2em;
+  vertical-align: bottom;
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+
+  img {
+    width: 33px;
+    height: 33px;
+  }
+}
+
+.loading {
+  background: transparent url("loading.gif") no-repeat center top;
+  background-size: 33px 33px;
+
+  div,
+  button {
+    opacity: 0;
+  }
+}
+
+.results {
+  min-height: 200px;
+
+  div,
+  button {
+    transition: opacity 2s;
+  }
+}
 
 button {
   background: $primary-background;
@@ -17,6 +46,7 @@ button {
   font-size: inherit;
   width: 100%;
   margin: 7px 7px 0 0;
+  cursor: pointer;
   @media (min-width: 426px) {
     width: auto;
   }
@@ -29,12 +59,13 @@ select {
   width: 100%;
   margin: 3px 0;
   border: 1px solid $secondary-color;
+  max-width: 600px;
 }
 
 input[type=search] { -webkit-appearance: textfield; }
 
 .btn-toggle {
-  margin-bottom: 20px;
+  margin-left: 1em;
 }
 
 @media (min-width: 426px) {

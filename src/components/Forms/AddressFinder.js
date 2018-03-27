@@ -14,7 +14,7 @@ class AddressFinder extends React.Component {
 
     widget.on('result:select', (value, item) => {
       this.props.data.loadResults(
-        this.props.data.category ? this.props.data.category : '', '', {latitude: item.y, longitude: item.x});
+        this.props.data.category ? this.props.data.category : '', '', {latitude: item.y, longitude: item.x}, this.props.radius);
     });
   }
 
@@ -22,7 +22,7 @@ class AddressFinder extends React.Component {
   render() {
     return (
       <div className="address_finder_container">
-        <input id="address_field" type="search" name="address" className="address-finder-input" placeholder="Enter a Location" />
+        <input id="address_field" type="search" onBlur={this.props.handler.bind(this)} name="address" className="address-finder-input" placeholder="Enter a Location" />
       </div>
     );
   }

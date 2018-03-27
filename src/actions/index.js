@@ -18,17 +18,19 @@ export function loadFilters(){
   };
 }
 
-export function loadResults(category, keyword, addressLatLng) {
-
+export function loadResults(category, keyword, addressLatLng, radius = 50000) {
   let url = encodeURI(`${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${FIELDS}&q=${q(keyword)}&distinct=true${filters(category)}`);
   let addressObj = Object.keys(addressLatLng ? addressLatLng : {none: 'none'});
   return (dispatch) => {
-    return axios.get(url).then((response)=>{
+    dispatch(loadingResults(true));
 
+    return axios.get(url).then((response)=>{
+      dispatch(loadingResults(false));
       if(addressObj.length === 2 && addressLatLng !== undefined) {
-        dispatch(showResults(findNearMe(response.data.result.records, addressLatLng), category, keyword, addressLatLng));
+        //greater than 50000 means 100000 of within 50000
+        dispatch(showResults(findNearMe(response.data.result.records, addressLatLng, ((radius > 50000)?100000:radius)), category, keyword, addressLatLng, radius));
       } else {
-        dispatch(showResults(checkLatLng(response.data.result.records), category, keyword, addressLatLng));
+        dispatch(showResults(checkLatLng(response.data.result.records), category, keyword, addressLatLng, radius));
       }
     });
   };
@@ -38,15 +40,13 @@ function checkLatLng(data) {
   return data.filter(r => r.PHYSICAL_ADDRESS.match(/\d+/g) !== null && r.LATITUDE !== '0' && r.LONGITUDE !== '0' && r.LATITUDE !== null && r.LONGITUDE !== null);
 }
 
-function findNearMe(data, addressLatLng) {
-
+function findNearMe(data, addressLatLng, radius) {
   let filteredData = checkLatLng(data);
-
   for(let i in filteredData) {
     let isInside = geolib.isPointInCircle(
       {latitude: addressLatLng.latitude, longitude: addressLatLng.longitude},
       {latitude: filteredData[i].LATITUDE, longitude: filteredData[i].LONGITUDE},
-      25000
+      radius
     ); // 25km radius
     let distance = geolib.getDistance(
       {latitude: addressLatLng.latitude, longitude: addressLatLng.longitude},
@@ -65,13 +65,22 @@ export function showFilters(filters){
   };
 }
 
-export function showResults(results, category, keyword, addressLatLng) {
+export function showResults(results, category, keyword, addressLatLng, radius) {
   return {
     type: 'SHOW_RESULTS',
     results,
     category,
     keyword,
-    addressLatLng
+    addressLatLng,
+    radius
   };
 }
+
+export function loadingResults(bool) {
+  return {
+    type: 'LOAD_RESULTS',
+    loading: bool
+  };
+}
+
 

@@ -22,7 +22,7 @@ linters:
 
   BorderZero:
     enabled: true
-    convention: zero # or `none`
+    convention: zero  # or `none`
 
   ChainedClasses:
     enabled: false
@@ -51,7 +51,7 @@ linters:
 
   ElsePlacement:
     enabled: true
-    style: same_line # or 'new_line'
+    style: same_line  # or 'new_line'
 
   EmptyLineBetweenBlocks:
     enabled: true
@@ -69,11 +69,11 @@ linters:
 
   HexLength:
     enabled: false
-    style: short # or 'long'
+    style: short  # or 'long'
 
   HexNotation:
     enabled: true
-    style: lowercase # or 'uppercase'
+    style: lowercase  # or 'uppercase'
 
   HexValidation:
     enabled: true
@@ -92,12 +92,12 @@ linters:
   Indentation:
     enabled: true
     allow_non_nested_indentation: false
-    character: space # or 'tab'
+    character: space  # or 'tab'
     width: 2
 
   LeadingZero:
     enabled: true
-    style: include_zero # or 'exclude_zero'
+    style: include_zero  # or 'exclude_zero'
 
   MergeableSelector:
     enabled: true
@@ -106,7 +106,7 @@ linters:
   NameFormat:
     enabled: true
     allow_leading_underscore: true
-    convention: hyphenated_lowercase # or 'camel_case', or 'snake_case', or a regex pattern
+    convention: hyphenated_lowercase  # or 'camel_case', or 'snake_case', or a regex pattern
 
   NestingDepth:
     enabled: true
@@ -139,14 +139,14 @@ linters:
   PropertyUnits:
     enabled: true
     global: [
-      'ch', 'em', 'ex', 'rem',                 # Font-relative lengths
-      'cm', 'in', 'mm', 'pc', 'pt', 'px', 'q', # Absolute lengths
-      'vh', 'vw', 'vmin', 'vmax',              # Viewport-percentage lengths
-      'deg', 'grad', 'rad', 'turn',            # Angle
-      'ms', 's',                               # Duration
-      'Hz', 'kHz',                             # Frequency
-      'dpi', 'dpcm', 'dppx',                   # Resolution
-      '%']                                     # Other
+      'ch', 'em', 'ex', 'rem',                  # Font-relative lengths
+      'cm', 'in', 'mm', 'pc', 'pt', 'px', 'q',  # Absolute lengths
+      'vh', 'vw', 'vmin', 'vmax',               # Viewport-percentage lengths
+      'deg', 'grad', 'rad', 'turn',             # Angle
+      'ms', 's',                                # Duration
+      'Hz', 'kHz',                              # Frequency
+      'dpi', 'dpcm', 'dppx',                    # Resolution
+      '%']                                      # Other
     properties: {}
 
   PseudoElement:
@@ -164,7 +164,7 @@ linters:
 
   SelectorFormat:
     enabled: true
-    convention: hyphenated_lowercase # or 'strict_BEM', or 'hyphenated_BEM', or 'snake_case', or 'camel_case', or a regex pattern
+    convention: hyphenated_lowercase  # or 'strict_BEM', or 'hyphenated_BEM', or 'snake_case', or 'camel_case', or a regex pattern
 
   Shorthand:
     enabled: true
@@ -179,29 +179,29 @@ linters:
 
   SpaceAfterComma:
     enabled: true
-    style: one_space # or 'no_space', or 'at_least_one_space'
+    style: one_space  # or 'no_space', or 'at_least_one_space'
 
   SpaceAfterPropertyColon:
     enabled: true
-    style: one_space # or 'no_space', or 'at_least_one_space', or 'aligned'
+    style: one_space  # or 'no_space', or 'at_least_one_space', or 'aligned'
 
   SpaceAfterPropertyName:
     enabled: true
 
   SpaceAfterVariableColon:
     enabled: false
-    style: one_space # or 'no_space', 'at_least_one_space' or 'one_space_or_newline'
+    style: one_space  # or 'no_space', 'at_least_one_space' or 'one_space_or_newline'
 
   SpaceAfterVariableName:
     enabled: true
 
   SpaceAroundOperator:
     enabled: true
-    style: one_space # or 'at_least_one_space', or 'no_space'
+    style: one_space  # or 'at_least_one_space', or 'no_space'
 
   SpaceBeforeBrace:
     enabled: true
-    style: space # or 'new_line'
+    style: space  # or 'new_line'
     allow_single_line_padding: false
 
   SpaceBetweenParens:
@@ -210,7 +210,7 @@ linters:
 
   StringQuotes:
     enabled: true
-    style: double_quotes # or single_quotes
+    style: double_quotes  # or single_quotes
 
   TrailingSemicolon:
     enabled: true

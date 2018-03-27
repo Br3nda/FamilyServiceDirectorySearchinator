@@ -1,0 +1,21 @@
+.proximity {
+  max-width: 450px;
+  margin-top: 1em; }
+
+.range input {
+  width: 93%;
+  margin-bottom: 0; }
+
+.range-labels {
+  padding: 0;
+  list-style: none;
+  margin-top: 0; }
+  .range-labels li {
+    display: inline-block;
+    width: 33%; }
+  .range-labels .middle {
+    text-align: center; }
+  .range-labels .last {
+    text-align: right; }
+
+/*# sourceMappingURL=Proximity.css.map */
