@@ -3,19 +3,6 @@
 
 form { margin: 25px 0 35px; }
 
-.loader {
-  margin-top: 0.2em;
-  margin-left: 0.2em;
-  vertical-align: bottom;
-  display: inline-block;
-  width: 33px;
-  height: 33px;
-
-  img {
-    width: 33px;
-    height: 33px;
-  }
-}
 
 .loading {
   background: transparent url("loading.gif") no-repeat center top;
