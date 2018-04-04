@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,cAAe;EACb,UAAU,EAAE,IAAI;EAChB,YAAY,EAAE,CAAC;;AAGjB,YAAa;EACX,OAAO,EAAE,YAAY;;AAGvB,UAAW;EACT,aAAa,EAAE,GAAG",
-"sources": ["../scss/helpers/lists.scss"],
-"names": [],
-"file": "lists.css"
-}

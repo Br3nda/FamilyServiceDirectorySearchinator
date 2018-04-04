@@ -13,10 +13,7 @@ Object {
 
 exports[`actions should retrieve the results 1`] = `
 Object {
-  "addressLatLng": undefined,
-  "category": "Addiction",
-  "keyword": "Health",
-  "radius": undefined,
+  "noSearchVars": false,
   "results": Array [
     Object {
       "DELIVERY_METHODS": "",
@@ -26,6 +23,13 @@ Object {
       "SERVICE_NAME": "The Salvation Army Oasis Centre - Hamilton",
     },
   ],
+  "searchVars": Object {
+    "addressLatLng": null,
+    "category": "Addiction",
+    "keyword": "Health",
+    "radius": null,
+  },
+  "totalResults": 0,
   "type": "SHOW_RESULTS",
 }
 `;

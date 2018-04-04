@@ -1,0 +1,48 @@
+@import "./variables";
+
+.service-details {
+  transition: opacity 2s;
+
+  > div,
+  > ul,
+  > a {
+    margin-left: 25px;
+  }
+
+  > .service-categories {
+    margin-left: 0;
+  }
+
+  h4 {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0.2em;
+  }
+}
+
+.more-detail {
+  display: inline-block;
+  width: 100%;
+}
+
+.service-categories {
+  margin-top: 1.5em;
+
+  ul {
+    margin-top: 0.6em;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 0.3em;
+    margin-bottom: 0.3em;
+    border: solid 1px $primary-color;
+    padding: 0.2em 0.6em;
+  }
+}
+
+.selected a {
+  color: $white;
+}

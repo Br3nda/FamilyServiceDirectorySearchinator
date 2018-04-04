@@ -16,22 +16,10 @@ describe('Proximity', () => {
 
   beforeEach(() => {
     props = {
-      addressLatLng: undefined,
-      radius: undefined,
+      radius: 50000,
       handler: undefined
     };
     mountedProximity = undefined;
-  });
-
-  it('Does not render slider with no addressLatLng supplied', () => {
-    const inputs = rangeslider().find('input');
-    expect(inputs.length).toBe(0);
-  });
-
-  it('Does render slider if addressLatLng supplied', () => {
-    props.addressLatLng = {lat:-41.0,lng: 174.0}; /*roughly the centre of nz */
-    const inputs = rangeslider().find('input');
-    expect(inputs.length).toBe(1);
   });
 
   it('Slider returns default value when "changed"', () => {

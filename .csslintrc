@@ -1,0 +1,10 @@
+{
+  "ignore": [
+    "order-alphabetical",
+    "shorthand",
+    "qualified-headings"
+  ],
+  "exclude-list": [
+    "FamilyServiceDirectorySearchinator"
+  ]
+}

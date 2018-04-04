@@ -5,8 +5,7 @@ const RESOURCE_ID = process.env.REACT_APP_API_RESOURCE_ID;
 const API_PATH = process.env.REACT_APP_API_PATH;
 
 let filters = category => category ? `&filters={"LEVEL_1_CATEGORY":"${category}"}` : '';
-let q = keyword => keyword.length > 2 ? keyword : '';
-const FIELDS = 'LEVEL_1_CATEGORY,FSD_ID,LONGITUDE,LATITUDE,PROVIDER_NAME,PUBLISHED_CONTACT_EMAIL_1,PUBLISHED_PHONE_1,PROVIDER_CONTACT_AVAILABILITY,ORGANISATION_PURPOSE,PHYSICAL_ADDRESS,SERVICE_NAME,SERVICE_DETAIL,DELIVERY_METHODS,COST_TYPE,SERVICE_REFERRALS,PROVIDER_WEBSITE_1';
+const STATICFIELDS = 'FSD_ID,LONGITUDE,LATITUDE,PROVIDER_NAME,PUBLISHED_CONTACT_EMAIL_1,PUBLISHED_PHONE_1,PROVIDER_CONTACT_AVAILABILITY,ORGANISATION_PURPOSE,PHYSICAL_ADDRESS,PROVIDER_WEBSITE_1';
 
 export function loadFilters(){
   let sql = encodeURI(`SELECT "LEVEL_1_CATEGORY" as name, COUNT(*) as num FROM "${RESOURCE_ID}" GROUP BY name ORDER BY name`);
@@ -18,22 +17,53 @@ export function loadFilters(){
   };
 }
 
-export function loadResults(category, keyword, addressLatLng, radius = 50000) {
-  let url = encodeURI(`${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${FIELDS}&q=${q(keyword)}&distinct=true${filters(category)}`);
-  let addressObj = Object.keys(addressLatLng ? addressLatLng : {none: 'none'});
-  return (dispatch) => {
-    dispatch(loadingResults(true));
+/* category, keyword, addressLatLng, radius = 50000 */
+export function loadResults(searchVars) {
+  let addressObj = Object.keys(searchVars.addressLatLng ? searchVars.addressLatLng : {});
+  if(!searchVars.category && !searchVars.keyword && (!searchVars.addressLatLng || !searchVars.addressLatLng.latitude)){
+    return (dispatch) => {
+      dispatch(showResults([], searchVars, 0, true));
+    };
+  }else{
+    return (dispatch) => {
+      dispatch(loadingResults(true));
+      return axios.get(requestBuilder(searchVars)).then((response)=>{
+        if(addressObj.length === 2 && searchVars.addressLatLng !== undefined) {
+          //greater than 50000 means 100000 of within 50000
+          dispatch(showResults(findNearMe(response.data.result.records, searchVars.addressLatLng, ((searchVars.radius > 50000)?100000:searchVars.radius)), searchVars, response.data.result.total));
+        } else {
+          dispatch(showResults(response.data.result.records, searchVars, response.data.result.total));
+        }
+      });
+    };
+  }
+}
 
-    return axios.get(url).then((response)=>{
-      dispatch(loadingResults(false));
-      if(addressObj.length === 2 && addressLatLng !== undefined) {
-        //greater than 50000 means 100000 of within 50000
-        dispatch(showResults(findNearMe(response.data.result.records, addressLatLng, ((radius > 50000)?100000:radius)), category, keyword, addressLatLng, radius));
-      } else {
-        dispatch(showResults(checkLatLng(response.data.result.records), category, keyword, addressLatLng, radius));
-      }
-    });
+export function changeCategory(searchVars){
+  return (dispatch) => {
+    dispatch(changeCategories(searchVars));
   };
+}
+
+export function loadService(searchVars,serviceId){
+  let url = encodeURI(`${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${serviceId}&distinct=true`);
+  if(serviceId){
+    return (dispatch) => {
+      dispatch(loadingResults(true));
+      return axios.get(url).then((response)=>{
+        if(response.data.result.records.length > 0){
+          dispatch(showService(response.data.result.records));
+        }
+      });
+    };
+  }
+}
+
+function requestBuilder(searchVars){
+  let theq = (searchVars.keyword && searchVars.keyword.length > 2) ? '&q='+searchVars.keyword : '';
+  let url = encodeURI(`${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}${theq}&distinct=true${filters(searchVars.category)}`);
+  if(searchVars.addressLatLng.latitude) url += '&limit=5000';
+  return url;
 }
 
 function checkLatLng(data) {
@@ -55,8 +85,19 @@ function findNearMe(data, addressLatLng, radius) {
     filteredData[i].NEARME = isInside;
     filteredData[i].DISTANCE = distance;
   }
-  return filteredData.filter(r => r.NEARME === true);
+  return sortByDistance(filteredData.filter(r => r.NEARME === true));
 }
+
+function sortByDistance(data){
+  return data.sort(function(a,b){
+    if (a.DISTANCE < b.DISTANCE)
+      return -1;
+    if (a.DISTANCE > b.DISTANCE)
+      return 1;
+    return 0;
+  });
+}
+
 
 export function showFilters(filters){
   return {
@@ -65,14 +106,27 @@ export function showFilters(filters){
   };
 }
 
-export function showResults(results, category, keyword, addressLatLng, radius) {
+export function showResults(results, searchVars, totalResults, noSearchVars = false) {
   return {
     type: 'SHOW_RESULTS',
     results,
-    category,
-    keyword,
-    addressLatLng,
-    radius
+    searchVars,
+    totalResults,
+    noSearchVars
+  };
+}
+
+export function showService(results) {
+  return {
+    type: 'SHOW_SERVICE',
+    results
+  };
+}
+
+export function showServiceDetails(serviceDetails) {
+  return {
+    type: 'SHOW_SERVICE_DETAILS',
+    serviceDetails
   };
 }
 
@@ -81,6 +135,14 @@ export function loadingResults(bool) {
     type: 'LOAD_RESULTS',
     loading: bool
   };
+}
+
+export function changeCategories(searchVars) {
+  return {
+    type: 'CHANGE_CATEGORIES',
+    searchVars
+  };
+
 }
 
 
