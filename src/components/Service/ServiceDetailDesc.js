@@ -5,10 +5,19 @@ class ServiceDetailDesc extends Component {
 
   render() {
     return (
-      <div>
+      <div className="service-detail">
         {(this.props.services.length > 0) && this.props.services.map((data,index)=>
           <div key={index}>
-            <h4>{data.SERVICE_NAME}</h4>
+            <h3>{data.SERVICE_NAME}</h3>
+            <ul className="list-stripped">
+              {data.SERVICE_TARGET_AUDIENCES && <li><b>Target Audience:</b> {data.SERVICE_TARGET_AUDIENCES}</li>}
+              {data.DELIVERY_METHODS && <li><b>Delivery Methods:</b> {data.DELIVERY_METHODS}</li>}
+              {data.SERVICE_REFERRALS && <li><b>Service Referrals:</b> {data.SERVICE_REFERRALS}</li>}
+              {data.COST_DESCRIPTION && <li><b>Cost:</b>
+                {data.COST_TYPE && <span> {data.COST_TYPE}. </span>}
+                {data.COST_DESCRIPTION}</li>
+              }
+            </ul>
             {(data.SERVICE_NAME !== data.SERVICE_DETAIL) && <p>{data.SERVICE_DETAIL}</p>}
           </div>
         )}

@@ -17,7 +17,7 @@ class MapResults extends Component {
       <Map center={center} zoom={this.props.map_results.length !== 1 ? 5 : 12}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
 
         {this.props.map_results.map((record, i) =>

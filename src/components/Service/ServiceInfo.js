@@ -5,6 +5,7 @@ import MapResults from '../Map/MapResults';
 import { Route, Link } from 'react-router-dom';
 import Sharebar from '../Social/Sharebar';
 import ServiceDetail from './ServiceDetail';
+import ServiceContactDetail from './ServiceContactDetail';
 
 export class ServiceInfo extends React.Component {
 
@@ -31,7 +32,7 @@ export class ServiceInfo extends React.Component {
               <div key={key}>
                 <div className="search-result-hero">
                   <h2>{i.PROVIDER_NAME}</h2>
-                  <p>{i.PHYSICAL_ADDRESS}</p>
+                  <ServiceContactDetail phone={i.PUBLISHED_PHONE_1} email={i.PUBLISHED_CONTACT_EMAIL_1} hours={i.PROVIDER_CONTACT_AVAILABILITY} />
                 </div>
                 <ServiceDetail results={i} changeCategory={this.props.changeCategory} searchVars={this.props.searchVars} serviceId={i.FSD_ID} loadimmediately={true} preview={false} />
                 <Sharebar subject={i.PROVIDER_NAME}/>

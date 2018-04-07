@@ -11,6 +11,14 @@
   .service-details p {
     margin-top: 0.2em; }
 
+.service-detail {
+  margin-bottom: 3em; }
+  .service-detail ul {
+    margin: 1em 0; }
+  .service-detail b {
+    display: inline-block;
+    width: 148px; }
+
 .more-detail {
   display: inline-block;
   width: 100%; }
@@ -18,7 +26,7 @@
 .service-categories {
   margin-top: 1.5em; }
   .service-categories ul {
-    margin-top: 0.6em; }
+    margin-top: 0.1em; }
   .service-categories li {
     display: inline-block;
     margin-right: 0.3em;

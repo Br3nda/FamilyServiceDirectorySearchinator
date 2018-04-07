@@ -19,6 +19,7 @@ describe('ServiceContactDetail', () => {
       phone: undefined,
       email: undefined,
       hours: undefined,
+      address: undefined,
       website: undefined
     };
     mountedServiceContactDetail = undefined;
@@ -37,26 +38,17 @@ describe('ServiceContactDetail', () => {
 
   it('it will render two li if two property is supplied', () => {
     props.hours = 'All the time';
-    props.website = 'http://www.test.govt.nz';
+    props.phone = '0800 000 000';
     const uls = contactDetail().find('li');
     expect(uls.length).toBe(2);
   });
 
-  it('it will render three li if three property is supplied', () => {
+  it('it will render two anchor tags if all properties are supplied', () => {
     props.email = 'email@govt.nz';
-    props.website = 'http://www.test.govt.nz';
-    props.hours = 'All the time';
-    const uls = contactDetail().find('li');
-    expect(uls.length).toBe(3);
-  });
-
-  it('it will render three anchor tags if all properties are supplied', () => {
-    props.email = 'email@govt.nz';
-    props.website = 'http://www.test.govt.nz';
     props.hours = 'All the time';
     props.phone = '0123456789';
     const uls = contactDetail().find('a');
-    expect(uls.length).toBe(3);
+    expect(uls.length).toBe(2);
   });
 
 });

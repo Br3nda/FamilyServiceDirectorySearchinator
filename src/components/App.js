@@ -79,7 +79,7 @@ class App extends Component {
   }
 
   keywordBlur(e){
-    if(inputchanged){
+    if(inputchanged || e.target.value === ''){
       const clone = {...this.props.searchVars};
       clone.keyword = e.target.value;
       clone.addressLatLng = this.correctLatLng();

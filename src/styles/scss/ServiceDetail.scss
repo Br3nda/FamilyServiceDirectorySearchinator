@@ -22,6 +22,19 @@
   }
 }
 
+.service-detail {
+  margin-bottom: 3em;
+
+  ul {
+    margin: 1em 0;
+  }
+
+  b {
+    display: inline-block;
+    width: 148px;
+  }
+}
+
 .more-detail {
   display: inline-block;
   width: 100%;
@@ -31,7 +44,7 @@
   margin-top: 1.5em;
 
   ul {
-    margin-top: 0.6em;
+    margin-top: 0.1em;
   }
 
   li {
