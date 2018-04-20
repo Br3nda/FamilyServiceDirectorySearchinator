@@ -35,6 +35,10 @@ class AddressFinder extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({address: nextProps.data.searchVars.address});
+  }
+
   onAddressChange(value){
     this.setState({address: value});
   }

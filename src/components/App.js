@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actions/index';
 import MapResults from './Map/MapResults';
@@ -28,6 +29,7 @@ class App extends Component {
     this.onKeywordChange = this.onKeywordChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.correctLatLng = this.correctLatLng.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   debounce(func, wait, immediate) {
@@ -125,6 +127,17 @@ class App extends Component {
     return (this.props.searchVars.addressLatLng === undefined ? this.state.latlng : this.props.searchVars.addressLatLng);
   }
 
+  resetForm(){
+    this.setState({latlng: {},keyword: ''});
+    this.props.loadResults({
+      category: '',
+      keyword: '',
+      address: '',
+      addressLatLng: {},
+      radius: 50000
+    });
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -136,6 +149,7 @@ class App extends Component {
             <Proximity handler={this.radiusChange.bind(this)} radius={this.props.searchVars.radius}/>
           }
           <button type="submit">Search</button>
+          {(!this.props.noSearchVars && this.props.hasSearched) && <Route render={({ history,location}) => (<button type="button" onClick={()=> {(location.pathname !== '/' && history.push(''));this.resetForm();}}>Reset form</button>)} />}
         </form>
         <div className={'results' + (this.props.itemsLoading ? ' loading' : '')}>
           {this.resultCountButton()}
