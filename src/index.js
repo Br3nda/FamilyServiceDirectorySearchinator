@@ -25,7 +25,6 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={AppCon} />
             <Route path="/category/:category" component={AppCon} />
-            <Route path="/service/:name/:category" component={ServiceInfo} />
             <Route path="/service/:name" component={ServiceInfo} />
           </Switch>
         </div>

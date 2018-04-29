@@ -13,7 +13,7 @@ class Sharebar extends React.Component {
     let description = (this.props.description) ? this.props.description : subject;
 
 
-    let mailto = 'mailto:'+url+'?subject='+subject+'&body='+url;
+    let mailto = 'mailto:?subject='+subject+'&body='+url;
     let facebook = 'https://www.facebook.com/sharer/sharer.php?u='+url;
     let twitter = 'https://twitter.com/home?status='+description+':%20'+url;
 

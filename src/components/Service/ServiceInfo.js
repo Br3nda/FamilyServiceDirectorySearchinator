@@ -25,7 +25,7 @@ export class ServiceInfo extends React.Component {
       <div className="container-fluid">
         <div className={'service-info' + (filteredResults.length === 0 ? ' loading':'')}>
           <Route render={() => (
-            <Link to={'/'+(this.props.match.params.category ? 'category/'+encodeURIComponent(decodeURIComponent(this.props.match.params.category)):'')} onClick={()=> { window.scrollTo(0,0);}} >Go back</Link>
+            <Link to={'/'+(this.props.searchVars.category ? 'category/'+encodeURIComponent(decodeURIComponent(this.props.searchVars.category)):'')} onClick={()=> { window.scrollTo(0,0);}} >Go back</Link>
           )} />
           <ul className="list-stripped">
             {filteredResults.map((i, key)  => (

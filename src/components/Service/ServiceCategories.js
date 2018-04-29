@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import {withRouter} from 'react-router';
 
 class ServiceCategories extends React.Component {
@@ -12,9 +12,10 @@ class ServiceCategories extends React.Component {
           <ul className="list-stripped">
             {this.props.categories.map((data,index) => <Route key={index} render={() => (
               <li className={data === decodeURIComponent(this.props.category) ? 'selected'  : ''}>
-                <Link title={data} to={`/service/${this.props.serviceId+'/'+encodeURIComponent(data)}`} onClick={()=> {
+                <a href={`/service/${this.props.serviceId}`} onClick={(e)=> {
+                  e.preventDefault();
                   this.props.displayServiceDetails(data);
-                }} >{data}</Link>
+                }} >{data}</a>
               </li>)} />
             )}
           </ul>
