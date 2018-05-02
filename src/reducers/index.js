@@ -1,6 +1,7 @@
 let defaultState = {
   filter: [],
   results: [],
+  result: [],
   searchVars: {
     category: '',
     keyword: '',
@@ -40,7 +41,7 @@ const mainReducer = (state = defaultState, action) => {
   case 'SHOW_SERVICE':
     return {
       ...state,
-      results: action.results,
+      result: action.result,
       itemsLoading: false
     };
   case 'SHOW_SERVICE_DETAILS':

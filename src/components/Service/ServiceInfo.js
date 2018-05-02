@@ -18,8 +18,8 @@ export class ServiceInfo extends React.Component {
 
   render(){
     /* results is undefined when page loaded directly */
-    const { match: { params: { name } } , results } = this.props;
-    const filteredResults = results.filter(item => item.FSD_ID === name);
+    const { match: { params: { name } } , result } = this.props;
+    const filteredResults = result.filter(item => item.FSD_ID === name);
 
     return <div>
       <div className="container-fluid">
@@ -48,6 +48,6 @@ export class ServiceInfo extends React.Component {
 
 
 export default connect(
-  state => ({results: state.results,searchVars: state.searchVars}),
+  state => ({result: state.result,searchVars: state.searchVars}),
   actionCreators
 )(ServiceInfo);

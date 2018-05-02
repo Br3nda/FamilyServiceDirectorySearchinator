@@ -6,7 +6,8 @@ class AddressFinder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: this.props.data.searchVars.address
+      address: this.props.searchVars.address,
+      reset: this.props.noSearchVars
     };
     this.onAddressChange = this.onAddressChange.bind(this);
     this.onAddressBlur = this.onAddressBlur.bind(this);
@@ -24,9 +25,9 @@ class AddressFinder extends React.Component {
 
       widget.on('result:select', (value, item) => {
         this.setState({address: value});
-        this.props.data.loadResults({
-          category: this.props.data.searchVars.category ? this.props.data.searchVars.category : '',
-          keyword: this.props.data.searchVars.keyword ? this.props.data.searchVars.keyword : '',
+        this.props.loadResults({
+          category: this.props.searchVars.category ? this.props.searchVars.category : '',
+          keyword: this.props.searchVars.keyword ? this.props.searchVars.keyword : '',
           address: value,
           addressLatLng: (value)?{latitude: item.y, longitude: item.x}:{},
           radius: this.props.radius
@@ -36,19 +37,25 @@ class AddressFinder extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({address: nextProps.data.searchVars.address});
+    if(!nextProps.loading){
+      if(nextProps.searchVars.address.length === 0){
+        this.setState({address: ''});
+      }else if(nextProps.searchVars.address.length > 0){
+        this.setState({address: nextProps.searchVars.address});
+      }
+    }
   }
 
   onAddressChange(value){
-    this.setState({address: value});
+    this.setState({address: value,reset: false});
   }
 
   onAddressBlur(value){
-    this.setState({address: value});
+    this.setState({address: value,reset: false});
     if(!value){
-      this.props.data.loadResults({
-        category: this.props.data.searchVars.category ? this.props.data.searchVars.category : '',
-        keyword: this.props.data.searchVars.keyword ? this.props.data.searchVars.keyword : '',
+      this.props.loadResults({
+        category: this.props.searchVars.category ? this.props.searchVars.category : '',
+        keyword: this.props.searchVars.keyword ? this.props.searchVars.keyword : '',
         address: '',
         addressLatLng: {},
         radius: this.props.radius

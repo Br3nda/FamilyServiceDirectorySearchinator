@@ -116,10 +116,10 @@ export function showResults(results, searchVars, totalResults, noSearchVars = fa
   };
 }
 
-export function showService(results) {
+export function showService(result) {
   return {
     type: 'SHOW_SERVICE',
-    results
+    result
   };
 }
 

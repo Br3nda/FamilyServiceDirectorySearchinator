@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   componentWillMount () {
-    this.props.loadFilters();
+    if(this.props.filters.length === 0) this.props.loadFilters();
     this.radiusChange = this.debounce(this.radiusChange,200);
     this.setState({keyword: this.props.searchVars.keyword});
   }
@@ -144,7 +144,7 @@ class App extends Component {
         <Filters filters={this.props.filters} searchVars={this.props.searchVars} loadResults={this.props.loadResults} />
         <form className="form" onSubmit={e => this.formSubmit(e)}>
           <input value={this.state.keyword} type="search" name="keyword" onBlur={this.keywordBlur.bind(this)} onKeyPress={this.enterPressed.bind(this)} onChange={e => this.onKeywordChange(e.target.value)} placeholder="Enter topic or organisation" />
-          <AddressFinder data={this.props} radius={this.props.searchVars.radius}/>
+          <AddressFinder noSearchVars={this.props.noSearchVars} loading={this.props.itemsLoading} loadResults={this.props.loadResults} searchVars={this.props.searchVars} radius={this.props.searchVars.radius}/>
           {this.props.searchVars.addressLatLng && Object.keys(this.props.searchVars.addressLatLng).length !== 0 &&
             <Proximity handler={this.radiusChange.bind(this)} radius={this.props.searchVars.radius}/>
           }
