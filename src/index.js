@@ -16,7 +16,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 const store = createStore(reducers, applyMiddleware(thunk));
 
 class App extends React.Component {
-  render(){
+  render() {
     return (
       <HashRouter>
         <div>
@@ -33,5 +33,10 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
 ReactDOM.render(<Footer />, document.getElementById('footer'));

@@ -7,9 +7,7 @@ describe('ServiceContactDetail', () => {
   let mountedServiceContactDetail;
   const contactDetail = () => {
     if (!mountedServiceContactDetail) {
-      mountedServiceContactDetail = mount(
-        <ServiceContactDetail {...props} />
-      );
+      mountedServiceContactDetail = mount(<ServiceContactDetail {...props} />);
     }
     return mountedServiceContactDetail;
   };
@@ -20,12 +18,12 @@ describe('ServiceContactDetail', () => {
       email: undefined,
       hours: undefined,
       address: undefined,
-      website: undefined
+      website: undefined,
     };
     mountedServiceContactDetail = undefined;
   });
 
-  it('it won\'t render a ul if there\'s no contact details', () => {
+  it("it won't render a ul if there's no contact details", () => {
     const uls = contactDetail().find('ul');
     expect(uls.length).toBe(0);
   });
@@ -50,5 +48,4 @@ describe('ServiceContactDetail', () => {
     const uls = contactDetail().find('a');
     expect(uls.length).toBe(2);
   });
-
 });

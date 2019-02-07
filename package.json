@@ -4,8 +4,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
     "axios": "^0.18.0",
-    "babel-preset-stage-2": "^6.24.1",
     "geolib": "^2.0.24",
     "gh-pages": "^1.1.0",
     "i18n": "^0.8.3",
@@ -18,10 +27,10 @@
     "react-leaflet": "^1.9.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.1.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
-    "sinon": "^4.5.0"
+    "sinon": "^6.0.0"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -33,17 +42,18 @@
     "sass": "sass --watch src/styles/scss:src/styles/"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.4.3",
-    "babel-plugin-transform-class-properties": "^6.24.1",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-google": "^0.9.1",
+    "eslint": "^5.0.0",
+    "eslint-config-google": "^0.10.0",
     "eslint-plugin-react": "^7.6.1",
-    "expect": "^22.4.3",
+    "expect": "^23.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.4.3"
+    "jest": "^23.0.0"
   },
   "jest": {
     "moduleNameMapper": {
@@ -51,5 +61,11 @@
       "\\.(css|less)$": "identity-obj-proxy"
     },
     "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

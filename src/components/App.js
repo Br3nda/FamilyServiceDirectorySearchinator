@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index';
 import MapResults from './Map/MapResults';
 import AddressFinder from './Forms/AddressFinder';
@@ -15,13 +15,13 @@ import Proximity from './Forms/Proximity';
 let inputchanged = false;
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
       showMap: false,
       latlng: [],
-      keyword: ''
+      keyword: '',
+      resultLimit: 10,
     };
     this.resultButton = this.resultButton.bind(this);
     this.resultCountButton = this.resultCountButton.bind(this);
@@ -30,12 +30,14 @@ class App extends Component {
     this.formSubmit = this.formSubmit.bind(this);
     this.correctLatLng = this.correctLatLng.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.extendResultLimit = this.extendResultLimit.bind(this);
   }
 
   debounce(func, wait, immediate) {
     var timeout;
     return function() {
-      var context = this, args = arguments;
+      var context = this,
+        args = arguments;
       var later = function() {
         timeout = null;
         if (!immediate) func.apply(context, args);
@@ -47,68 +49,83 @@ class App extends Component {
     };
   }
 
-  componentWillMount () {
-    if(this.props.filters.length === 0) this.props.loadFilters();
-    this.radiusChange = this.debounce(this.radiusChange,200);
-    this.setState({keyword: this.props.searchVars.keyword});
+  componentWillMount() {
+    if (this.props.filters.length === 0) this.props.loadFilters();
+    this.radiusChange = this.debounce(this.radiusChange, 200);
+    this.setState({ keyword: this.props.searchVars.keyword });
   }
 
-  resultButton () {
-    if(this.props.results.length > 0){
-      return <button className="btn-toggle" onClick={() => {
-        this.setState({ showMap: !this.state.showMap}); }
-      }>{this.state.showMap ? 'Show List' : 'Toggle Map'}</button>;
+  resultButton() {
+    if (this.props.results.length > 0) {
+      return (
+        <button
+          className="btn-toggle"
+          onClick={() => {
+            this.setState({ showMap: !this.state.showMap });
+          }}
+        >
+          {this.state.showMap ? 'Show List' : 'Toggle Map'}
+        </button>
+      );
     }
   }
 
-  resultCountButton () {
-    if(!this.props.itemsLoading && this.props.hasSearched){
-      return <p className="results-desc">
-        {this.props.noSearchVars && <span>No search parameters supplied</span>}
-        {!this.props.noSearchVars && this.resultCountButtonText()}
-        {!this.props.noSearchVars && this.resultButton()}
-      </p>;
+  resultCountButton() {
+    const { itemsLoading, hasSearched, noSearchVars } = this.props;
+
+    if (!itemsLoading && hasSearched) {
+      return (
+        <p className="results-desc">
+          {noSearchVars && <span>No search parameters supplied</span>}
+          {!noSearchVars && this.resultCountButtonText()}
+          {!noSearchVars && this.resultButton()}
+        </p>
+      );
     }
   }
 
-  resultCountButtonText (){
-    let desc = 'Found '+this.props.results.length+' ';
-    if(this.props.totalResults && this.props.results.length === 100 && this.props.totalResults*1 > 100){
-      desc += 'of '+this.props.totalResults*1+' ';
+  resultCountButtonText() {
+    const { results, totalResults } = this.props;
+    const { resultLimit } = this.state;
+    let desc = `Found ${
+      results.length < resultLimit ? results.length : resultLimit
+    } `;
+    if (totalResults && results.length === 100 && totalResults > 100) {
+      desc += `of ${totalResults} `;
     }
-    desc += 'result'+(this.props.totalResults*1 !== 1 ? 's' : '');
+    desc += `result${totalResults > 1 ? 's' : ''}`;
     return desc;
   }
 
-  keywordBlur(e){
-    if(inputchanged || e.target.value === ''){
-      const clone = {...this.props.searchVars};
+  keywordBlur(e) {
+    if (inputchanged || e.target.value === '') {
+      const clone = { ...this.props.searchVars };
       clone.keyword = e.target.value;
       clone.addressLatLng = this.correctLatLng();
       this.props.loadResults(clone);
     }
   }
 
-  onKeywordChange(value){
-    this.setState({keyword: value});
+  onKeywordChange(value) {
+    this.setState({ keyword: value });
   }
 
   enterPressed(e) {
     inputchanged = true;
     var code = e.keyCode || e.which;
-    if(code === 13) {
+    if (code === 13) {
       inputchanged = false;
-      const clone = {...this.props.searchVars};
-      clone.keyword = (e.target.value === '') ? null : e.target.value;
+      const clone = { ...this.props.searchVars };
+      clone.keyword = e.target.value === '' ? null : e.target.value;
       clone.addressLatLng = this.correctLatLng();
       this.props.loadResults(clone);
     }
   }
 
-  radiusChange(value){
-    const clone = {...this.props.searchVars};
+  radiusChange(value) {
+    const clone = { ...this.props.searchVars };
     const callback = this.props.loadResults;
-    clone.radius = value*1;
+    clone.radius = value * 1;
     setImmediate(function() {
       callback(clone);
     });
@@ -116,60 +133,138 @@ class App extends Component {
 
   formSubmit(e) {
     e.preventDefault();
-    this.setState({latlng: this.props.searchVars.addressLatLng});
-    const clone = {...this.props.searchVars};
+    this.setState({ latlng: this.props.searchVars.addressLatLng });
+    const clone = { ...this.props.searchVars };
     clone.addressLatLng = this.correctLatLng();
     clone.keyword = e.target.keyword.value;
     this.props.loadResults(clone);
   }
 
-  correctLatLng(){
-    return (this.props.searchVars.addressLatLng === undefined ? this.state.latlng : this.props.searchVars.addressLatLng);
+  correctLatLng() {
+    return this.props.searchVars.addressLatLng === undefined
+      ? this.state.latlng
+      : this.props.searchVars.addressLatLng;
   }
 
-  resetForm(){
-    this.setState({latlng: {},keyword: ''});
+  resetForm() {
+    this.setState({ latlng: {}, keyword: '' });
     this.props.loadResults({
       category: '',
       keyword: '',
       address: '',
       addressLatLng: {},
-      radius: 50000
+      radius: 50000,
     });
   }
 
+  extendResultLimit(e) {
+    e.preventDefault();
+    this.setState({ resultLimit: this.state.resultLimit + 10 });
+  }
+
   render() {
+    const {
+      filters,
+      searchVars,
+      loadResults,
+      noSearchVars,
+      itemsLoading,
+      hasSearched,
+      results,
+      changeCategory,
+    } = this.props;
+    const { keyword, showMap, resultLimit } = this.state;
+
     return (
       <div className="container-fluid">
-        <Filters filters={this.props.filters} searchVars={this.props.searchVars} loadResults={this.props.loadResults} />
+        <Filters
+          filters={filters}
+          searchVars={searchVars}
+          loadResults={loadResults}
+        />
         <form className="form" onSubmit={e => this.formSubmit(e)}>
-          <input value={this.state.keyword} type="search" name="keyword" onBlur={this.keywordBlur.bind(this)} onKeyPress={this.enterPressed.bind(this)} onChange={e => this.onKeywordChange(e.target.value)} placeholder="Enter topic or organisation" />
-          <AddressFinder noSearchVars={this.props.noSearchVars} loading={this.props.itemsLoading} loadResults={this.props.loadResults} searchVars={this.props.searchVars} radius={this.props.searchVars.radius}/>
-          {this.props.searchVars.addressLatLng && Object.keys(this.props.searchVars.addressLatLng).length !== 0 &&
-            <Proximity handler={this.radiusChange.bind(this)} radius={this.props.searchVars.radius}/>
-          }
+          <input
+            value={keyword}
+            type="search"
+            name="keyword"
+            onBlur={this.keywordBlur.bind(this)}
+            onKeyPress={this.enterPressed.bind(this)}
+            onChange={e => this.onKeywordChange(e.target.value)}
+            placeholder="Enter topic or organisation"
+          />
+          <AddressFinder
+            noSearchVars={noSearchVars}
+            loading={itemsLoading}
+            loadResults={loadResults}
+            searchVars={searchVars}
+            radius={searchVars.radius}
+          />
+          {searchVars.addressLatLng &&
+            Object.keys(searchVars.addressLatLng).length !== 0 && (
+              <Proximity
+                handler={this.radiusChange.bind(this)}
+                radius={searchVars.radius}
+              />
+            )}
           <button type="submit">Search</button>
-          {(!this.props.noSearchVars && this.props.hasSearched) && <Route render={({ history,location}) => (<button type="button" onClick={()=> {(location.pathname !== '/' && history.push(''));this.resetForm();}}>Reset form</button>)} />}
+          {!noSearchVars && hasSearched && (
+            <Route
+              render={({ history, location }) => (
+                <button
+                  type="button"
+                  onClick={() => {
+                    location.pathname !== '/' && history.push('');
+                    this.resetForm();
+                  }}
+                >
+                  Reset form
+                </button>
+              )}
+            />
+          )}
         </form>
-        <div className={'results' + (this.props.itemsLoading ? ' loading' : '')}>
+        <div className={'results' + (itemsLoading ? ' loading' : '')}>
           {this.resultCountButton()}
-          { !this.props.itemsLoading && this.state.showMap && <MapResults className="container-fluid" LatLng={this.props.searchVars.addressLatLng} map_results={this.props.results} />}
-          { !this.props.itemsLoading && !this.state.showMap && this.props.results.map((data,index)=>
-            <LazyLoad height={280} key={index}>
-              <Service results={data} changeCategory={this.props.changeCategory} searchVars={this.props.searchVars} serviceId={data.FSD_ID} loadResults={this.props.loadResults} />
-            </LazyLoad>)}
+          {!itemsLoading && showMap && (
+            <MapResults
+              className="container-fluid"
+              LatLng={searchVars.addressLatLng}
+              map_results={results}
+            />
+          )}
+          {!itemsLoading &&
+            !showMap &&
+            results.map((data, index) => {
+              if (index < resultLimit) {
+                return (
+                  <LazyLoad height={280} key={index}>
+                    <Service
+                      results={data}
+                      changeCategory={changeCategory}
+                      searchVars={searchVars}
+                      serviceId={data.FSD_ID}
+                      loadResults={loadResults}
+                    />
+                  </LazyLoad>
+                );
+              }
+            })}
+          {results.length > resultLimit && (
+            <button onClick={e => this.extendResultLimit(e)}>Show More</button>
+          )}
         </div>
-        <Sharebar/>
+        <Sharebar />
       </div>
     );
   }
 }
 
-function mapStateToProps(state,ownProps) {
-  const clone = {...state.searchVars};
-  if(!state.searchVars.category && ownProps.startCategory){
+function mapStateToProps(state, ownProps) {
+  const clone = { ...state.searchVars };
+  if (!state.searchVars.category && ownProps.startCategory) {
     /* for some unidentified reason ownProps.startCategory is returning a string */
-    clone.category = (ownProps.startCategory === 'undefined') ? '' : ownProps.startCategory;
+    clone.category =
+      ownProps.startCategory === 'undefined' ? '' : ownProps.startCategory;
   }
   return {
     filters: state.filter,
@@ -179,8 +274,11 @@ function mapStateToProps(state,ownProps) {
     noSearchVars: state.noSearchVars,
     totalResults: state.totalResults,
     itemsLoading: state.itemsLoading,
-    hasSearched: state.hasSearched
+    hasSearched: state.hasSearched,
   };
 }
 
-export default connect(mapStateToProps, actionCreators)(App);
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(App);

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 
-const ServiceMapMarker = ( props ) => {
-  let position = {lat: props.record.LATITUDE*1, lng: props.record.LONGITUDE*1};
+const ServiceMapMarker = props => {
+  let position = {
+    lat: props.record.LATITUDE * 1,
+    lng: props.record.LONGITUDE * 1,
+  };
   return (
     <div>
-      {props.record.LATITUDE && props.record.LONGITUDE &&
+      {props.record.LATITUDE && props.record.LONGITUDE && (
         <Marker position={position}>
           <Popup>
             <span>
@@ -16,7 +19,7 @@ const ServiceMapMarker = ( props ) => {
             </span>
           </Popup>
         </Marker>
-      }
+      )}
     </div>
   );
 };
